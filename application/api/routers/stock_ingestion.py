@@ -1,15 +1,27 @@
 from __future__ import annotations
 
 import logging
-from fastapi import APIRouter, BackgroundTasks, File, HTTPException, UploadFile
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Depends,
+    File,
+    HTTPException,
+    UploadFile,
+)
 from starlette import status
 
+from application.api.dependencies.middleware import token_auth_middleware
 from application.celery.tasks import process_stocks_data_task
 from domain.stock_data.stock_data_ingestion import BatchDataProcessor
 from load_symbols import load_symbols
 
 
-router = APIRouter(prefix="/api", tags=["Ingestion"])
+router = APIRouter(
+    prefix="/api",
+    tags=["Ingestion"],
+    dependencies=[Depends(token_auth_middleware)],
+)
 
 log = logging.getLogger("stock_ingestion")
 

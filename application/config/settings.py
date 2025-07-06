@@ -23,8 +23,7 @@ class Settings(BaseSettings):
     twelve_data_api_key: str = ""
 
     model_config = SettingsConfigDict(
-        env_file=".env.docker",
-        env_file_encoding="utf-8",
+        env_file=".env.docker", env_file_encoding="utf-8", extra="ignore"
     )
 
 

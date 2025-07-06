@@ -137,3 +137,8 @@ coverage html
 ## 📚 Local documentation
 
 `http://localhost:8000/docs`
+
+
+###### <font color="#b0acf7"> Valid bearer token for testing:</font>
+
+> VALID_BEARER_TOKEN=ek8KCVd4KjW5jGWKeWbE1yzbqDXJEBU48pllsEuy5ubSlcz4EMVWHll7D329VIsl

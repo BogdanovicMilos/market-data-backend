@@ -8,7 +8,7 @@ from application.api.routers import stock_ingestion
 
 @pytest.mark.asyncio
 async def test_ingest_stock_data_triggers_batch(
-    monkeypatch, client: AsyncClient
+    auth_headers, monkeypatch, client: AsyncClient
 ):
     """POST /api/ingestion schedules a background ETL run"""
 
@@ -26,7 +26,7 @@ async def test_ingest_stock_data_triggers_batch(
     )
 
     # Call the ingestion endpoint
-    response = await client.post("/api/ingestion")
+    response = await client.post("/api/ingestion", headers=auth_headers)
     assert response.status_code == 200
     assert response.json() == {"message": "ETL process started in background"}
 

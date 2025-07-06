@@ -8,7 +8,7 @@ import logging
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import insert
 
-from application.api.dependencies import async_get_db
+from application.api.dependencies.db import async_get_db
 from application.api.schemas.stock_price import StockPriceCreate
 from application.config.settings import settings
 from infrastructure.database.models.stock_price import StockPrice

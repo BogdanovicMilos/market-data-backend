@@ -110,7 +110,9 @@ class StockPriceRepositoryPrepopulated(StockPriceRepository):
 
 
 @pytest.mark.asyncio
-async def test_get_all(mocker: MockerFixture, client: AsyncClient):
+async def test_get_all(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/prices returns all seeded prices"""
 
     mocker.patch(
@@ -118,7 +120,7 @@ async def test_get_all(mocker: MockerFixture, client: AsyncClient):
         StockPriceRepositoryPrepopulated,
     )
 
-    response = await client.get("/api/stock/prices")
+    response = await client.get("/api/stock/prices", headers=auth_headers)
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
@@ -126,7 +128,9 @@ async def test_get_all(mocker: MockerFixture, client: AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_get_price_by_id(mocker, client: AsyncClient):
+async def test_get_price_by_id(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/{id} returns the correct price"""
 
     mocker.patch(
@@ -134,7 +138,7 @@ async def test_get_price_by_id(mocker, client: AsyncClient):
         StockPriceRepositoryPrepopulated,
     )
     test_id = str(uuid.UUID(int=1))
-    response = await client.get(f"/api/stock/{test_id}")
+    response = await client.get(f"/api/stock/{test_id}", headers=auth_headers)
     assert response.status_code == 200
     data = response.json()
     assert data["id"] == test_id
@@ -142,7 +146,9 @@ async def test_get_price_by_id(mocker, client: AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_get_prices_by_date_range(mocker, client: AsyncClient):
+async def test_get_prices_by_date_range(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/search?start=...&end=... filters by date range"""
 
     mocker.patch(
@@ -152,14 +158,18 @@ async def test_get_prices_by_date_range(mocker, client: AsyncClient):
     # Seeded timestamp is 2025-01-01T12:00:00
     start = "2025-01-01T00:00:00"
     end = "2025-01-02T00:00:00"
-    response = await client.get(f"/api/stock/search?start={start}&end={end}")
+    response = await client.get(
+        f"/api/stock/search?start={start}&end={end}", headers=auth_headers
+    )
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 2
 
 
 @pytest.mark.asyncio
-async def test_get_prices_by_date_range_no_match(mocker, client: AsyncClient):
+async def test_get_prices_by_date_range_no_match(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/search outside the seeded date returns empty list"""
 
     mocker.patch(
@@ -169,21 +179,27 @@ async def test_get_prices_by_date_range_no_match(mocker, client: AsyncClient):
     # Range with no overlapping timestamp
     start = "2024-01-01T00:00:00"
     end = "2024-12-31T23:59:59"
-    response = await client.get(f"/api/stock/search?start={start}&end={end}")
+    response = await client.get(
+        f"/api/stock/search?start={start}&end={end}", headers=auth_headers
+    )
     assert response.status_code == 200
     data = response.json()
     assert data == []
 
 
 @pytest.mark.asyncio
-async def test_pagination_skip(mocker, client: AsyncClient):
+async def test_pagination_skip(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/prices?skip=1 skips the first result"""
 
     mocker.patch(
         "application.api.routers.stock_price.StockPriceRepository",
         StockPriceRepositoryPrepopulated,
     )
-    response = await client.get("/api/stock/prices?skip=1")
+    response = await client.get(
+        "/api/stock/prices?skip=1", headers=auth_headers
+    )
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 1
@@ -191,21 +207,27 @@ async def test_pagination_skip(mocker, client: AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_pagination_limit(mocker, client: AsyncClient):
+async def test_pagination_limit(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/prices?limit=1 limits to a single result"""
 
     mocker.patch(
         "application.api.routers.stock_price.StockPriceRepository",
         StockPriceRepositoryPrepopulated,
     )
-    response = await client.get("/api/stock/prices?limit=1")
+    response = await client.get(
+        "/api/stock/prices?limit=1", headers=auth_headers
+    )
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 1
 
 
 @pytest.mark.asyncio
-async def test_get_nonexistent_price_by_id(mocker, client: AsyncClient):
+async def test_get_nonexistent_price_by_id(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/{id} with unknown id returns 404"""
 
     mocker.patch(
@@ -213,17 +235,21 @@ async def test_get_nonexistent_price_by_id(mocker, client: AsyncClient):
         StockPriceRepositoryPrepopulated,
     )
     nonexist_id = str(uuid.uuid4())
-    response = await client.get(f"/api/stock/{nonexist_id}")
+    response = await client.get(
+        f"/api/stock/{nonexist_id}", headers=auth_headers
+    )
     assert response.status_code == 404
 
 
 @pytest.mark.asyncio
-async def test_get_invalid_uuid_returns_422(mocker, client: AsyncClient):
+async def test_get_invalid_uuid_returns_422(
+    auth_headers, mocker: MockerFixture, client: AsyncClient
+):
     """GET /api/stock/{id} with invalid UUID returns 422"""
 
     mocker.patch(
         "application.api.routers.stock_price.StockPriceRepository",
         StockPriceRepositoryPrepopulated,
     )
-    response = await client.get("/api/stock/not-a-uuid")
+    response = await client.get("/api/stock/not-a-uuid", headers=auth_headers)
     assert response.status_code == 422

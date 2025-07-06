@@ -6,7 +6,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
-from application.api.dependencies import async_get_db
+from application.api.dependencies.db import async_get_db
+from application.api.dependencies.middleware import token_auth_middleware
 from application.api.schemas.stock_price import (
     StockPrice,
     StockPriceCreate,
@@ -17,7 +18,11 @@ from infrastructure.database.repositories.stock_price_repository import (
 )
 
 
-router = APIRouter(prefix="/api/stock", tags=["Stocks"])
+router = APIRouter(
+    prefix="/api/stock",
+    tags=["Stocks"],
+    dependencies=[Depends(token_auth_middleware)],
+)
 
 log = logging.getLogger("stock_price")
 

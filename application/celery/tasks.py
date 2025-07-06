@@ -3,7 +3,7 @@ import io
 import pandas as pd
 from sqlalchemy.dialects.postgresql import insert
 
-from application.api.dependencies import async_get_db
+from application.api.dependencies.db import async_get_db
 from application.celery.main import celery
 from infrastructure.database.models.stock_price import StockPrice
 

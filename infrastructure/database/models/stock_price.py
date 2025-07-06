@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from sqlalchemy import Column, DateTime, Float, String, UniqueConstraint
 
-from application.api.dependencies import Base
+from application.api.dependencies.db import Base
 from application.api.schemas.stock_price import StockPrice as StockPriceSchema
 from infrastructure.database.utils import TimestampsMixin, UUIDMixin
 
