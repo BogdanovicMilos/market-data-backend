@@ -8,31 +8,31 @@ The Market Data BE project implements a clean, modular, and layered backend arch
 
 ### Layers & Key Components:
 
-- _API Layer_ - `application/` <br></br>
+- _API Layer_ - `application/`
 
    - FastAPI-based REST endpoints for stock price queries and data ingestion.
    - Routers and Pydantic schemas for request/response validation.
    - Dependency injection for service and config management.
 
 
-- _Domain Layer_ - `domain/` <br></br>
+- _Domain Layer_ - `domain/`
 
   - Core business logic for batch processing and data ingestion.
   - Encapsulates domain-specific operations and rules.
 
 
-- _Infrastructure Layer_ - `infrastructure/` <br></br>
+- _Infrastructure Layer_ - `infrastructure/`
   - SQLAlchemy models and database connection utilities.
   - Repository pattern for abstracted data access.
   - Alembic migrations for schema evolution.
 
 
-- _Testing_ - `tests/` <br></br>
+- _Testing_ - `tests/`
   - Pytest-based test suite with coverage reporting.
   - Organized by component for maintainability.
 
 
-### Ingestion overview: <br></br>
+### Ingestion overview:
 
 ###### <font color="#b0acf7"> Stock Data CSV file ingestion via API</font>
 
