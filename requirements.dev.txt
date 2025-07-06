@@ -1,0 +1,16 @@
+alembic==1.13.0
+alembic-postgresql-enum
+black
+flake8
+flake8-bugbear
+isort
+memory_profiler
+mypy
+pre-commit
+pylint
+pytest>=7.4.2
+pytest-asyncio
+pytest-cov
+pytest-factoryboy==2.5.1
+pytest-mock==3.11.1
+python-dateutil

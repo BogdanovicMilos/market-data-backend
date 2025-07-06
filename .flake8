@@ -1,0 +1,14 @@
+[flake8]
+max-line-length = 120
+extend-ignore = E203
+
+exclude =
+    migrations,
+    __pycache__,
+    tests,
+    env,
+    .env,
+    .idea
+
+per-file-ignores =
+    */__init__.py: F401, F403

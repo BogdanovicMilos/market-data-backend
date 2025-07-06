@@ -1,0 +1,11 @@
+
+symbols:
+  - AAPL
+  - MSFT
+  - TSLA
+
+poll_interval_seconds: 10
+start_date: "2025-05-01 00:00:00"
+batch_time_interval: "1day"
+batch:
+  outputsize: compact

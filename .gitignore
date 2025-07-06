@@ -1,0 +1,40 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+*.tfvars.json
+
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+.terraformrc
+terraform.rc
+
+.idea
+.idea/
+.DS_Store
+
+# Environments
+.env
+.venv
+env/
+venv/
+.coverage
+
+# IDE - VSCode
+.vscode
+
+**/__pycache__/
+__pycache__
+dump
+
+**/node_modules/*
