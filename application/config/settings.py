@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     allowed_origins: str = ""
     twelve_data_url: str = ""
     twelve_data_api_key: str = ""
+    redis_broker: str = ""
+    redis_backend: str = ""
 
     model_config = SettingsConfigDict(
         env_file=".env.docker", env_file_encoding="utf-8", extra="ignore"

@@ -1,18 +1,12 @@
 from celery import Celery
 
+from application.config.settings import settings
 
-# Docker configuration
-broker = "redis://redis:6379/0"
-backend = "redis://redis:6379/1"
-
-# Local configuration
-# broker = "redis://localhost:6379/0"
-# backend = "redis://localhost:6379/1"
 
 celery = Celery(
     "fastapi_ingest",
-    broker=broker,
-    backend=backend,
+    broker=settings.redis_broker,
+    backend=settings.redis_backend,
     include=["application.celery.tasks"],
 )
 

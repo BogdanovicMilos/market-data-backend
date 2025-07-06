@@ -24,6 +24,7 @@ terraform.rc
 .DS_Store
 
 # Environments
+.env.docker
 .env
 .venv
 env/
