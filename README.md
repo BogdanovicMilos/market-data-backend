@@ -100,23 +100,38 @@ Install requirements:
 pip3 install -r requirements.txt -r requirements.dev.txt
 ```
 
-
 Run migrations:
 ```bash
 alembic upgrade head
 ```
-
 
 Run server:
 ```bash
 uvicorn application.api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
+Run Redis server:
+```bash
+redis-server
+```
+
+Run Celery worker:
+```bash
+celery -A application.celery.main:celery worker --loglevel=info
+```
+
+
+
 ## ▶️ Run using docker compose
 
 Run docker compose:
 ```bash
 docker compose up --build
+```
+
+Remove all containers, networks, images, and volumes:
+```bash
+docker compose down -v
 ```
 
 ## 🧪 Tests and coverage
@@ -139,6 +154,6 @@ coverage html
 `http://localhost:8000/docs`
 
 
-###### <font color="#b0acf7"> Valid bearer token for testing:</font>
+Valid bearer token for testing:
 
-> VALID_BEARER_TOKEN=ek8KCVd4KjW5jGWKeWbE1yzbqDXJEBU48pllsEuy5ubSlcz4EMVWHll7D329VIsl
+- `VALID_BEARER_TOKEN=ek8KCVd4KjW5jGWKeWbE1yzbqDXJEBU48pllsEuy5ubSlcz4EMVWHll7D329VIsl`
