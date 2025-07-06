@@ -77,7 +77,7 @@ For local development:
     env_file_encoding="utf-8",
 )
 
-For docker compose:
+For docker compose (default):
 > model_config = SettingsConfigDict(
     env_file=".env.docker",
     env_file_encoding="utf-8",
