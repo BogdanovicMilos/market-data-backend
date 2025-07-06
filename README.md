@@ -4,7 +4,7 @@ Market Data backend repository
 
 ## 🚀 Architecture Overview
 
-The Market Data BE project implements a clean, modular, and layered backend architecture in `Python 3.12` for managing and serving market data.
+The Market Data BE project implements a clean, modular, and layered backend architecture in `FastAPI` with `Python 3.12` for managing and serving market data.
 
 ### Layers & Key Components:
 
