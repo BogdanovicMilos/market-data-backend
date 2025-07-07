@@ -34,7 +34,7 @@ The Market Data BE project implements a clean, modular, and layered backend arch
 
 ### Ingestion overview:
 
-###### <font color="#b0acf7"> Stock Data CSV file ingestion via API</font>
+###### <font color="#b0acf7"> Stock Data ingestion via Twelve Data API</font>
 
   - The project supports data ingestion from the Twelve Data API which we can trigger through `/api/ingestion` endpoint, allowing updates of stock market data.
    We can customize an automated pipeline with the `ingestion_config.yaml` file. In it, we can define which market symbols to ingest, set the polling interval, batch time window and specify the start date.
